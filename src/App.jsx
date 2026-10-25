@@ -1,11 +1,11 @@
-import TestBakong from './pages/home/test_bakong.jsx'
+import { RouterProvider } from 'react-router-dom'
+import Providers from './app/providers.jsx'
+import { router } from './app/router.jsx'
 
-const App = () => {
-  return (
-    <div>
-      <TestBakong />
-    </div>
-  )
-}
+const App = () => (
+  <Providers>
+    <RouterProvider router={router} />
+  </Providers>
+)
 
 export default App

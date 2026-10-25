@@ -33,3 +33,9 @@ export const verifyBakongPayment = (md5, { baseURL, token }) =>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ md5 }),
   })
+
+// Admin: payment history / total_payment
+export const listPayments = (params = {}) => {
+  const qs = new URLSearchParams(params).toString()
+  return apiFetch(`/payments${qs ? `?${qs}` : ''}`)
+}

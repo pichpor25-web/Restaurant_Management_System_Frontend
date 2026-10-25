@@ -3,7 +3,11 @@ const DEFAULT_API_BASE_URL =
 
 export const apiFetch = async (
   path,
-  { baseURL = DEFAULT_API_BASE_URL, token, ...options } = {},
+  {
+    baseURL = DEFAULT_API_BASE_URL,
+    token = localStorage.getItem('rms_token'),
+    ...options
+  } = {},
 ) => {
   const headers = new Headers(options.headers)
   headers.set('Accept', 'application/json')
@@ -31,4 +35,21 @@ export const apiFetch = async (
   }
 
   return data
+}
+
+// JSON helpers used by the feature services
+const json = (method) => (path, body, options = {}) =>
+  apiFetch(path, {
+    ...options,
+    method,
+    headers: { 'Content-Type': 'application/json', ...options.headers },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  })
+
+export const api = {
+  get: (path, options) => apiFetch(path, options),
+  post: json('POST'),
+  put: json('PUT'),
+  patch: json('PATCH'),
+  delete: (path, options) => apiFetch(path, { ...options, method: 'DELETE' }),
 }
