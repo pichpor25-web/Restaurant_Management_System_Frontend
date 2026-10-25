@@ -4,8 +4,8 @@ import TableAssignedCard from '../../features/dinein/TableAssignedCard.jsx'
 const DineInSuccessPage = () => {
   const { id } = useParams()
   const { state } = useLocation()
-  const order = state?.order
-  const tableNumber = order?.table_number ?? order?.table?.table_number
+  const table = state?.table
+  const tableNumber = table?.table_number ?? table?.number ?? table?.id
 
   return (
     <div className="mx-auto max-w-md space-y-5 p-6 text-center">
