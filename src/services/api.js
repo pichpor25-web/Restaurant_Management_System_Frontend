@@ -38,13 +38,15 @@ export const apiFetch = async (
 }
 
 // JSON helpers used by the feature services
-const json = (method) => (path, body, options = {}) =>
-  apiFetch(path, {
+const json = (method) => (path, body, options = {}) => {
+  const isForm = body instanceof FormData // file upload: let the browser set the boundary
+  return apiFetch(path, {
     ...options,
     method,
-    headers: { 'Content-Type': 'application/json', ...options.headers },
-    body: body === undefined ? undefined : JSON.stringify(body),
+    headers: isForm ? options.headers : { 'Content-Type': 'application/json', ...options.headers },
+    body: body === undefined ? undefined : isForm ? body : JSON.stringify(body),
   })
+}
 
 export const api = {
   get: (path, options) => apiFetch(path, options),

@@ -1,10 +1,11 @@
 import { formatCurrency } from '../../utils/formatCurrency.js'
 import { useCart } from '../../hooks/useCart.js'
+import { imageUrl } from '../../utils/imageUrl.js'
 
 const MenuCard = ({ item }) => {
   const { items, addItem, decreaseItem } = useCart()
   const inCart = items.find((i) => i.id === item.id)
-  const image = item.image_url ?? item.image
+  const image = imageUrl(item.image ?? item.image_url)
 
   return (
     <div className={`rounded-3xl border bg-white p-4 ${inCart ? 'border-rose-500' : 'border-slate-200'}`}>

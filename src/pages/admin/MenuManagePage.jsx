@@ -9,6 +9,7 @@ import MenuForm from '../../features/admin/MenuForm.jsx'
 import { useCategories, useMenuItems } from '../../hooks/useMenu.js'
 import { menuItemService } from '../../services/menuItemService.js'
 import { formatCurrency } from '../../utils/formatCurrency.js'
+import { imageUrl } from '../../utils/imageUrl.js'
 
 const MenuManagePage = () => {
   const menu = useMenuItems({})
@@ -47,6 +48,18 @@ const MenuManagePage = () => {
         <DataTable
           rows={Array.isArray(menu.data) ? menu.data : []}
           columns={[
+            {
+              key: 'image',
+              header: 'Image',
+              render: (r) => {
+                const src = imageUrl(r.image ?? r.image_url)
+                return src ? (
+                  <img src={src} alt={r.name} className="size-12 rounded-lg object-cover" />
+                ) : (
+                  <div className="size-12 rounded-lg bg-slate-100" />
+                )
+              },
+            },
             { key: 'name', header: 'Name' },
             { key: 'price', header: 'Price', render: (r) => formatCurrency(r.price) },
             {
