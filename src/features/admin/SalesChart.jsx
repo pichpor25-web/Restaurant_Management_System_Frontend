@@ -1,18 +1,20 @@
-// Dependency-free bar chart. data: [{ label, value }]
-// Swap for recharts later: npm i recharts
-const SalesChart = ({ data = [], title = 'Sales' }) => {
-  const max = Math.max(1, ...data.map((d) => d.value))
+// src/features/admin/SalesChart.jsx
+import { useTheme } from '../../context/ThemeContext.jsx'
+
+const SalesChart = ({ title, data }) => {
+  const { isDark } = useTheme()
+
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5">
-      <p className="mb-4 font-bold">{title}</p>
-      <div className="flex h-48 items-end gap-3">
-        {data.map((d) => (
-          <div key={d.label} className="flex flex-1 flex-col items-center gap-1">
-            <div className="w-full rounded-t-lg bg-rose-500" style={{ height: `${(d.value / max) * 100}%` }} title={d.value} />
-            <span className="text-xs text-slate-400">{d.label}</span>
-          </div>
-        ))}
-        {data.length === 0 && <p className="m-auto text-sm text-slate-400">No data</p>}
+    // បន្ថែម dark:bg-[#1E293B] និង dark:border-slate-700 នៅទីនេះ
+    <div className="bg-white dark:bg-[#1E293B] border border-gray-100 dark:border-slate-700 rounded-xl p-4 shadow-sm w-full transition-colors">
+      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+        {title}
+      </h3>
+      
+      {/* ប្រអប់សម្រាប់ក្រាហ្វ (បើអ្នកប្រើ Recharts ឬ Chart.js សូមដាក់នៅទីនេះ) */}
+      <div className="h-64 flex items-center justify-center text-gray-400 dark:text-gray-500">
+         {/* ឧទាហរណ៍៖ បើអ្នកមាន Recharts វានឹងបង្ហាញនៅទីនេះ */}
+         Chart Data Placeholder
       </div>
     </div>
   )

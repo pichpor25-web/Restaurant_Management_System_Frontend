@@ -1,20 +1,29 @@
-// data: [{ name, qty }]
-const TopSellingChart = ({ data = [] }) => {
-  const max = Math.max(1, ...data.map((d) => d.qty))
+// src/features/admin/TopSellingChart.jsx
+const TopSellingChart = ({ data }) => {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5">
-      <p className="mb-4 font-bold">Top selling items</p>
-      <div className="space-y-3">
-        {data.map((d) => (
-          <div key={d.name}>
-            <div className="flex justify-between text-sm"><span>{d.name}</span><b>{d.qty}</b></div>
-            <div className="h-2 rounded-full bg-slate-100"><div className="h-2 rounded-full bg-rose-500" style={{ width: `${(d.qty / max) * 100}%` }} /></div>
+    // បន្ថែម dark:bg-[#1E293B] និង dark:border-slate-700
+    <div className="bg-white dark:bg-[#1E293B] border border-gray-100 dark:border-slate-700 rounded-xl p-4 shadow-sm w-full transition-colors">
+      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+        Top selling items
+      </h3>
+
+      <div className="space-y-4">
+        {data.map((item, index) => (
+          <div key={index} className="flex flex-col gap-1">
+            <span className="text-sm text-gray-600 dark:text-gray-300">
+              {item.name}
+            </span>
+            <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
+              {/* ប្រអប់ពណ៌ក្រហមសម្រាប់បង្ហាញកម្រិត */}
+              <div
+                className="bg-rose-500 h-2 rounded-full"
+                style={{ width: `${(item.value / 500) * 100}%` }}
+              ></div>
+            </div>
           </div>
         ))}
-        {data.length === 0 && <p className="text-sm text-slate-400">No data</p>}
       </div>
     </div>
-  )
-}
-
-export default TopSellingChart
+  );
+};
+export default TopSellingChart;

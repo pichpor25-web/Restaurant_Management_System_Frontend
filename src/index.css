@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+/* បន្ថែមបន្ទាត់នេះសម្រាប់ Tailwind v4 Dark Mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* កំណត់ពណ៌ Background សកល */
+body {
+  @apply bg-slate-50 text-slate-900 transition-colors duration-300;
+}
+
+html.dark body {
+  @apply bg-[#0B1120] text-slate-100;
+}

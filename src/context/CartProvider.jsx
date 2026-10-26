@@ -1,12 +1,13 @@
+// src/context/CartProvider.jsx
 import { useMemo, useReducer } from 'react'
-import { CartContext } from './cartContext.js'
+import { CartContext } from './cartContext.js' // នាំចូលពី File .js
 import { ORDER_TYPE } from '../utils/constants.js'
 import { calcTotals } from '../utils/calcTotals.js'
 
 const initial = {
-  items: [], // { id, name, price, image, qty }
+  items: [],
   orderType: ORDER_TYPE.DINE_IN,
-  customer: { name: '', phone: '' }, // take-away only
+  customer: { name: '', phone: '' },
   paymentMethod: 'bakong',
 }
 
@@ -39,6 +40,7 @@ const reducer = (state, action) => {
   }
 }
 
+// ប្រើ export default ដើម្បីងាយស្រួលនាំចូល
 const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initial)
   const value = useMemo(

@@ -23,6 +23,7 @@ import ReportsPage from '../pages/admin/ReportsPage.jsx'
 import UsersPage from '../pages/admin/UsersPage.jsx'
 
 import TestBakongPage from '../pages/dev/TestBakongPage.jsx'
+import ProfilePage from '../pages/admin/ProfilePage.jsx'
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,7 @@ export const router = createBrowserRouter([
           { path: 'payments', element: <PaymentsPage /> },
           { path: 'reports', element: <ReportsPage /> },
           { path: 'users', element: <UsersPage /> },
+          { path: 'profile', element: <ProfilePage /> },
         ],
       },
     ],
